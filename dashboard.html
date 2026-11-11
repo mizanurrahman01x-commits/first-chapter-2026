@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | THE FIRST CHAPTER 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+    <nav class="admin-nav">
+        <div class="nav-brand">TFC 2026 Admin</div>
+        <button id="btn-logout" class="btn btn-secondary btn-small">Logout</button>
+    </nav>
+
+    <div class="admin-container">
+        <!-- Sidebar / Tabs -->
+        <aside class="admin-sidebar">
+            <button class="tab-btn active" data-target="overview">Overview</button>
+            <button class="tab-btn" data-target="participants">Participants</button>
+            <button class="tab-btn" data-target="scanner">Check-In Scanner</button>
+            <button class="tab-btn" data-target="settings">Event Settings</button>
+            <button class="tab-btn" data-target="gallery-upload">Gallery Upload</button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="admin-main">
+            
+            <!-- Tab: Overview -->
+            <section id="tab-overview" class="tab-content active">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Registered</h3>
+                        <p id="stat-total" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Class XI</h3>
+                        <p id="stat-xi" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Checked In</h3>
+                        <p id="stat-checked" class="stat-number">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Participants -->
+            <section id="tab-participants" class="tab-content">
+                <div class="table-header">
+                    <h2>Participant List</h2>
+                    <button id="btn-export-csv" class="btn btn-primary">Export CSV</button>
+                </div>
+                
+                <div class="filters">
+                    <input type="text" id="search-input" placeholder="Search by name or roll number...">
+                    <select id="filter-class">
+                        <option value="all">All Classes</option>
+                        <option value="XI">Class XI</option>
+                    </select>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Roll No</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="participant-table-body">
+                            <!-- Rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Tab: Scanner -->
+            <section id="tab-scanner" class="tab-content">
+                <h2>Ticket Verification</h2>
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">Point the camera at the QR code, or paste the Ticket ID manually.</p>
+                
+                <div id="qr-reader" style="width: 100%; max-width: 500px; margin: 0 auto 1rem;"></div>
+                
+                <div class="manual-checkin">
+                    <input type="text" id="manual-ticket-input" placeholder="Enter Ticket ID (TFC-2026-...)">
+                    <button id="btn-manual-checkin" class="btn btn-primary">Verify</button>
+                </div>
+                
+                <div id="scan-result" class="scan-result hidden">
+                    <!-- Result injected via JS -->
+                </div>
+            </section>
+
+            <!-- Tab: Settings -->
+            <section id="tab-settings" class="tab-content">
+                <h2>Event Configuration</h2>
+                <div class="input-group">
+                    <label>Event Start Time (Updates public countdown)</label>
+                    <input type="datetime-local" id="event-time-input">
+                </div>
+                <button id="btn-save-settings" class="btn btn-primary">Save Changes</button>
+                <p id="settings-msg" class="hidden" style="color: var(--gold); margin-top: 1rem;">Saved successfully!</p>
+            </section>
+
+            <!-- Tab: Gallery -->
+            <section id="tab-gallery-upload" class="tab-content">
+                <h2>Upload Event Photos</h2>
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">Select an image to upload to the public gallery. Max 3MB per image.</p>
+                <input type="file" id="gallery-file-input" accept="image/*" style="margin-bottom: 1rem; color: white;">
+                <button id="btn-upload-photo" class="btn btn-primary">Upload Photo</button>
+                <p id="upload-status" style="margin-top: 1rem;"></p>
+                
+                <div id="admin-gallery-grid" class="gallery-grid" style="margin-top: 2rem;">
+                    <!-- Admin images with delete buttons -->
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modals for viewing participant details -->
+    <div id="detail-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Participant Details</h2>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <!-- Firebase & Libraries -->
+    <!-- Scan library for QR -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script type="module" src="../js/admin-dashboard.js"></script>
+        <!-- Global Footer Script -->
+    <script src="js/footer.js"></script>
+</body>
+</html>

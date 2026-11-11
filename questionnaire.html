@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire | THE FIRST CHAPTER - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/questionnaire.css">
+</head>
+<body>
+    <div class="form-container">
+        <header class="form-header">
+            <img src="assets/logo.png" alt="Ethos" class="form-logo">
+            <h1>THE FIRST CHAPTER <span>2026</span></h1>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <p class="step-indicator">Step <span id="current-step">1</span> of <span id="total-steps">6</span></p>
+
+        <form id="freshers-form" novalidate>
+            <!-- Step 1: Identity -->
+            <div class="form-step active" data-step="1">
+                <h2>Welcome to the Beginning</h2>
+                <p class="step-desc">Let's start with the basics.</p>
+                <div class="input-group">
+                    <label for="fullName">What is your full name? *</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                    <span class="error-msg" id="err-fullName">Please enter your full name.</span>
+                </div>
+            </div>
+
+            <!-- Step 2: Academic -->
+            <div class="form-step" data-step="2">
+                <h2>Academic Details</h2>
+                <p class="step-desc">Tell us about your academic life.</p>
+                <div class="input-group">
+                    <label for="rollNumber">What is your roll number? * (Format: XI-###)</label>
+                    <input type="text" id="rollNumber" name="rollNumber" required placeholder="e.g., XI-045" pattern="XI-\d{3}">
+                    <span class="error-msg" id="err-rollNumber">Please enter a valid roll number (e.g., XI-045).</span>
+                </div>
+                <div class="input-group">
+                    <label>What are your favourite subjects? * (Choose up to 3)</label>
+                    <div class="checkbox-group">
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Physics"> Physics</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Chemistry"> Chemistry</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Maths"> Maths</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Biology"> Biology</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Computer Science"> Computer Science</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="English"> English</label>
+                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Other"> Other</label>
+                    </div>
+                    <span class="error-msg" id="err-subjects">Please select at least one subject.</span>
+                </div>
+            </div>
+
+            <!-- Step 3: Personality -->
+            <div class="form-step" data-step="3">
+                <h2>Personality</h2>
+                <p class="step-desc">A little bit about you.</p>
+                <div class="input-group">
+                    <label for="threeWords">Describe yourself in three words. *</label>
+                    <input type="text" id="threeWords" name="threeWords" required placeholder="e.g., Curious, Ambitious, Kind" maxlength="60">
+                    <span class="error-msg" id="err-threeWords">Please describe yourself.</span>
+                </div>
+                <div class="input-group">
+                    <label for="hiddenTalent">What is your hidden talent?</label>
+                    <input type="text" id="hiddenTalent" name="hiddenTalent" placeholder="e.g., Playing guitar, solving Rubik's cube">
+                </div>
+            </div>
+
+            <!-- Step 4: Interests -->
+            <div class="form-step" data-step="4">
+                <h2>Your World</h2>
+                <p class="step-desc">What makes you, you?</p>
+                <div class="input-group">
+                    <label for="hobbies">What do you love doing outside of school?</label>
+                    <textarea id="hobbies" name="hobbies" rows="3" placeholder="Reading, sports, coding..."></textarea>
+                </div>
+            </div>
+
+            <!-- Step 5: Dreams -->
+            <div class="form-step" data-step="5">
+                <h2>Dreams & Expectations</h2>
+                <p class="step-desc">Think big. What's your vision?</p>
+                <div class="input-group">
+                    <label for="bigDream">What is your biggest dream? *</label>
+                    <textarea id="bigDream" name="bigDream" required rows="3" placeholder="To become..."></textarea>
+                    <span class="error-msg" id="err-bigDream">Please share your dream.</span>
+                </div>
+                <div class="input-group">
+                    <label for="oneWord">One word that describes how you feel about joining Ethos.</label>
+                    <input type="text" id="oneWord" name="oneWord" placeholder="Excited, nervous, hopeful..." maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label for="expectations">What are you expecting from your seniors? *</label>
+                    <textarea id="expectations" name="expectations" required rows="3" placeholder="Guidance, friendship, fun events..."></textarea>
+                    <span class="error-msg" id="err-expectations">Please share your expectations.</span>
+                </div>
+            </div>
+
+            <!-- Step 6: Future Self -->
+            <div class="form-step" data-step="6">
+                <h2>A Message to Your Future Self</h2>
+                <p class="step-desc">A time capsule. Write a note to the person you will become in a year.</p>
+                <div class="input-group">
+                    <label for="futureSelf">Leave a message for your future self. *</label>
+                    <textarea id="futureSelf" name="futureSelf" required rows="4" placeholder="Dear future me..."></textarea>
+                    <span class="error-msg" id="err-futureSelf">Please leave a message.</span>
+                </div>
+                <div class="input-group">
+                    <label class="custom-checkbox consent-label">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        I consent to my name and responses being used in event materials (invitation, ticket, slideshow). *
+                    </label>
+                    <span class="error-msg" id="err-consent">You must consent to continue.</span>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="form-nav">
+                <button type="button" id="btn-prev" class="btn btn-secondary">Previous</button>
+                <button type="button" id="btn-next" class="btn btn-primary">Next</button>
+                <button type="submit" id="btn-submit" class="btn btn-primary hidden">Submit</button>
+            </div>
+        </form>
+        
+        <div id="form-error" class="global-error hidden"></div>
+    </div>
+
+    <!-- Firebase SDKs (App, Auth, Firestore) -->
+    <script type="module" src="js/questionnaire.js"></script>
+        <!-- Global Footer Script -->
+    <script src="js/footer.js"></script>
+</body>
+</html>

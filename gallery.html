@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories | THE FIRST CHAPTER - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body class="dark-bg">
+    <div class="container">
+        <header class="page-header">
+            <a href="index.html" class="back-link">← Back to Home</a>
+            <h1>Event Memories</h1>
+            <p>Reliving the moments of THE FIRST CHAPTER 2026.</p>
+        </header>
+
+        <div id="gallery-loader" class="loader-text">Loading memories...</div>
+        <div id="empty-gallery" class="hidden">
+            <p>Photos coming soon. The memories will appear here after the event!</p>
+        </div>
+        
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Photos will be injected here via JS -->
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-img" id="lightbox-img">
+    </div>
+
+    <script type="module" src="js/gallery.js"></script>
+        <!-- Global Footer Script -->
+    <script src="js/footer.js"></script>
+</body>
+</html>

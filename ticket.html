@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Ticket | THE FIRST CHAPTER - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/invitation.css"> <!-- Reuses some card styles -->
+</head>
+<body>
+    <div class="invite-page">
+        <div class="actions-bar">
+            <a href="invitation.html" class="btn btn-secondary">Back to Invitation</a>
+            <button id="btn-download-ticket" class="btn btn-primary">Save Ticket</button>
+        </div>
+
+        <div class="ticket-wrapper">
+            <div id="ticket-card" class="ticket-card">
+                <div class="ticket-header">
+                    <h2>THE FIRST CHAPTER 2026</h2>
+                    <p>ETHOS SENIOR SECONDARY SCHOOL</p>
+                </div>
+                
+                <div class="ticket-body">
+                    <div class="ticket-info">
+                        <p><span>NAME</span> <strong id="ticket-name">Student Name</strong></p>
+                        <p><span>CLASS</span> <strong>Class XI (Science)</strong></p>
+                        <p><span>DATE</span> <strong>27 Nov 2026</strong></p>
+                        <p><span>TICKET ID</span> <strong id="ticket-id" class="mono">TFC-2026-XXXXX</strong></p>
+                    </div>
+                    <div class="ticket-qr">
+                        <!-- QR Code generated via API/Canvas -->
+                        <div id="qrcode"></div>
+                        <p class="qr-label">SCAN AT ENTRY</p>
+                    </div>
+                </div>
+                
+                <div class="ticket-footer">
+                    <p>Admit One. Non-transferable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QRCode.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- html2canvas for saving ticket -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="module" src="js/ticket.js"></script>
+        <!-- Global Footer Script -->
+    <script src="js/footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Invitation | THE FIRST CHAPTER - 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/invitation.css">
+</head>
+<body>
+    <div class="invite-page">
+        <div class="actions-bar">
+            <a href="ticket.html" class="btn btn-secondary">View Digital Ticket</a>
+            <button id="btn-download-png" class="btn btn-primary">Download PNG</button>
+            <button id="btn-download-pdf" class="btn btn-primary">Download PDF</button>
+        </div>
+
+        <!-- The actual card that gets downloaded (Instagram Square format 1080x1080) -->
+        <div class="invitation-card-wrapper">
+            <div id="invitation-card" class="invitation-card square-format">
+                <div class="border-inner"></div>
+                <div class="card-content">
+                    <img src="assets/logo.png" alt="Ethos Logo" class="card-logo" crossorigin="anonymous">
+                    <h2 class="card-school">ETHOS SENIOR SECONDARY SCHOOL</h2>
+                    <p class="card-location">Barpeta, Assam</p>
+                    
+                    <div class="card-divider"></div>
+                    
+                    <h1 class="card-title">THE FIRST CHAPTER <br><span>— 2026 —</span></h1>
+                    <p class="card-subtitle">A Freshers' Welcome</p>
+                    
+                    <div class="card-divider small"></div>
+                    
+                    <p class="card-presented">This digital invitation is proudly presented to</p>
+                    <h3 class="card-name" id="display-name">Student Name</h3>
+                    <p class="card-roll">Roll No: <span id="display-roll">XI-000</span></p>
+                    
+                    <div class="card-event-details">
+                        <p><strong>Date:</strong> 27 November 2026</p>
+                        <p><strong>Venue:</strong> School Campus</p>
+                    </div>
+                    
+                    <div class="card-quote">
+                        <p>"A new journey. A new chapter.<br>A thousand possibilities."</p>
+                    </div>
+                    
+                    <p class="card-footer">"Every great story begins somewhere."</p>
+                    <p class="card-seniors">With love, your Seniors</p>
+                    <p style="font-size: 0.6rem; color: #888; margin-top: 0.3rem;">Created by <span style="color: #d4af37;">Meezan Ur Rahman</span> · @meezns</p>
+                </div>
+            </div>
+        </div>
+        <p class="tip">Tip: On mobile, you can also long-press the image to save it.</p>
+    </div>
+
+    <!-- html2canvas & jspdf libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="js/invitation.js"></script>
+        <!-- Global Footer Script -->
+    <script src="js/footer.js"></script>
+</body>
+</html>
