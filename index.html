@@ -3,30 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login | THE FIRST CHAPTER</title>
+    <title>THE FIRST CHAPTER - 2026 | Ethos Senior Secondary School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
-<body class="admin-login-body">
-    <div class="login-card">
-        <h1>Admin Portal</h1>
-        <p>THE FIRST CHAPTER 2026</p>
+    
+    <style>
+        /* --- ALL CSS BUNDLED HERE --- */
+        :root {
+            --bg-dark: #0a0a0a; --bg-charcoal: #121212; --bg-card: #1a1a1a;
+            --gold: #d4af37; --gold-light: #f3e5ab; --text-main: #f5f5f5;
+            --text-muted: #a0a0a0; --border-gold: rgba(212, 175, 55, 0.3);
+            --font-heading: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+            --radius: 8px; --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; overflow-x: hidden; }
+        .hidden { display: none !important; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
+        a { text-decoration: none; color: inherit; }
+        button { font-family: inherit; cursor: pointer; border: none; }
+
+        /* Loader */
+        .loader-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.8s ease; }
+        .loader-content { text-align: center; }
+        .loader-logo { width: 80px; margin-bottom: 1rem; animation: pulse 2s infinite; }
+        .loader-title { color: var(--gold); font-size: 1.8rem; letter-spacing: 4px; }
+        .loader-subtitle { color: var(--text-muted); letter-spacing: 8px; margin-bottom: 2rem; }
+        .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; }
+        .loader-progress { width: 0%; height: 100%; background: var(--gold); animation: load 2s forwards; }
+        @keyframes load { 0% { width: 0; } 100% { width: 100%; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2rem 1rem; }
+        .hero-content { text-align: center; max-width: 800px; animation: fadeIn 2s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .school-logo { width: 100px; margin-bottom: 1rem; }
+        .school-name { font-size: 1.2rem; letter-spacing: 2px; }
+        .school-location { font-size: 0.9rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 1rem; }
+        .divider { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 1.5rem; }
+        .event-title { font-size: 2.5rem; line-height: 1.2; color: var(--gold); margin-bottom: 0.5rem; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .title-line { display: block; } .title-year { display: block; font-size: 1.5rem; color: var(--gold-light); letter-spacing: 4px; }
+        .event-subtitle { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 1px; }
+        .event-details { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+        .detail-item { display: flex; flex-direction: column; }
+        .detail-label { font-size: 0.7rem; color: var(--gold); letter-spacing: 2px; font-weight: 600; margin-bottom: 0.2rem; }
+        .detail-value { font-size: 1rem; font-weight: 300; }
         
-        <form id="login-form">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required placeholder="admin@example.com" value="mizanurrahman01x@gmail.com" readonly>
-                <!-- Note: Readonly prevents others from trying other emails, ensuring only your account logs in. -->
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" required placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
-            <p id="login-error" class="error-msg hidden" style="text-align:center; margin-top:1rem;"></p>
-        </form>
+        /* Countdown */
+        .countdown-container { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+        .countdown-box { background: rgba(26, 26, 26, 0.6); border: 1px solid var(--border-gold); border-radius: var(--radius); padding: 0.8rem 1rem; min-width: 70px; }
+        .countdown-number { display: block; font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold); line-height: 1; }
+        .countdown-label { display: block; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.3rem; }
+        .tagline-wrapper { margin-bottom: 2rem; } .tagline { font-style: italic; color: var(--text-muted); font-size: 1.1rem; }
+
+        /* Buttons */
+        .btn { display: inline-block; padding: 0.8rem 1.5rem; border-radius: var(--radius); font-family: var(--font-body); font-weight: 500; text-align: center; transition: var(--transition); letter-spacing: 1px; }
+        .btn-primary { background: var(--gold); color: var(--bg-dark); border: 1px solid var(--gold); }
+        .btn-primary:hover { background: transparent; color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .btn-large { padding: 1rem 2.5rem; font-size: 1rem; width: 100%; max-width: 300px; }
+
+        /* Footer */
+        .global-footer { text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.85rem; color: var(--text-muted); }
+        .global-footer .credit { color: var(--gold); font-weight: 500; margin-bottom: 0.3rem; }
+        .global-footer a { color: var(--gold); font-weight: 600; }
+
+        @media (min-width: 768px) {
+            .school-logo { width: 120px; } .event-title { font-size: 4rem; } .title-year { font-size: 2rem; }
+            .event-subtitle { font-size: 1.2rem; } .event-details { flex-direction: row; justify-content: center; gap: 3rem; }
+            .countdown-container { gap: 2rem; } .countdown-box { padding: 1rem 1.5rem; min-width: 90px; } .countdown-number { font-size: 2.5rem; } .btn-large { width: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader-screen">
+        <div class="loader-content">
+            <img src="assets/logo.png" alt="Ethos Logo" class="loader-logo">
+            <h1 class="loader-title">THE FIRST CHAPTER</h1>
+            <p class="loader-subtitle">2026</p>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
     </div>
-    <script type="module" src="/js/admin-login.js"></script>
+
+    <div id="main-content" class="hidden">
+        <main class="hero">
+            <div class="hero-content">
+                <div class="school-brand">
+                    <img src="assets/logo.png" alt="Ethos Logo" class="school-logo">
+                    <h2 class="school-name">ETHOS SENIOR SECONDARY SCHOOL</h2>
+                    <p class="school-location">Barpeta, Assam</p>
+                </div>
+                <div class="divider"></div>
+                <h1 class="event-title">
+                    <span class="title-line">THE FIRST CHAPTER</span>
+                    <span class="title-year">— 2026 —</span>
+                </h1>
+                <p class="event-subtitle">A Freshers' Welcome for Class XI (Science Stream)</p>
+
+                <div class="event-details">
+                    <div class="detail-item"><span class="detail-label">DATE</span><span class="detail-value">27 November 2026</span></div>
+                    <div class="detail-item"><span class="detail-label">VENUE</span><span class="detail-value">School Campus</span></div>
+                    <div class="detail-item"><span class="detail-label">TIME</span><span class="detail-value">To be announced</span></div>
+                </div>
+
+                <div class="countdown-container">
+                    <div class="countdown-box"><span id="days" class="countdown-number">00</span><span class="countdown-label">Days</span></div>
+                    <div class="countdown-box"><span id="hours" class="countdown-number">00</span><span class="countdown-label">Hours</span></div>
+                    <div class="countdown-box"><span id="minutes" class="countdown-number">00</span><span class="countdown-label">Minutes</span></div>
+                    <div class="countdown-box"><span id="seconds" class="countdown-number">00</span><span class="countdown-label">Seconds</span></div>
+                </div>
+
+                <div class="tagline-wrapper">
+                    <p class="tagline">"Every great story begins somewhere."</p>
+                </div>
+                <a href="/first-chapter-2026/questionnaire.html" class="btn btn-primary btn-large">ENTER THE EXPERIENCE</a>
+            </div>
+        </main>
+        
+        <footer class="global-footer">
+            <p class="credit">Designed & Developed by Mizanur Rahman</p>
+            <p>Connect on Instagram: <a href="https://instagram.com/meezns" target="_blank">@meezns</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // --- ALL JS BUNDLED HERE ---
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Hide Loader
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('main-content').classList.remove('hidden');
+                }, 800);
+            }, 2500);
+
+            // 2. Countdown
+            const countdownDate = new Date("2026-11-27T09:00:00").getTime();
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                if (distance < 0) return;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const format = (num) => num < 10 ? `0${num}` : num;
+
+                document.getElementById("days").innerText = format(days);
+                document.getElementById("hours").innerText = format(hours);
+                document.getElementById("minutes").innerText = format(minutes);
+                document.getElementById("seconds").innerText = format(seconds);
+            };
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
 </body>
 </html>
