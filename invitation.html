@@ -5,61 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Invitation | THE FIRST CHAPTER - 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/invitation.css">
+    <style>
+        :root { --bg-dark: #0a0a0a; --gold: #d4af37; --gold-light: #f3e5ab; --text-main: #f5f5f5; --text-muted: #a0a0a0; --border-gold: rgba(212, 175, 55, 0.3); --font-heading: 'Cinzel', serif; --font-body: 'Inter', sans-serif; --radius: 8px; --transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-dark) 100%); color: var(--text-main); font-family: var(--font-body); min-height: 100vh; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; }
+        
+        .actions-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 2rem; width: 100%; max-width: 600px; }
+        .btn { display: inline-block; padding: 0.8rem 1.5rem; border-radius: var(--radius); font-weight: 500; text-align: center; transition: var(--transition); cursor: pointer; border: none; font-family: inherit; font-size: 0.85rem; }
+        .btn-primary { background: var(--gold); color: var(--bg-dark); border: 1px solid var(--gold); }
+        .btn-secondary { background: transparent; color: var(--text-main); border: 1px solid rgba(255,255,255,0.2); text-decoration: none; }
+
+        .invitation-card-wrapper { width: 100%; max-width: 500px; overflow: hidden; border-radius: var(--radius); box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .invitation-card { width: 100%; aspect-ratio: 1 / 1; background: #0d0d0d; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+        
+        .border-inner { position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid var(--gold); pointer-events: none; }
+        .border-inner::before, .border-inner::after { content: ''; position: absolute; width: 20px; height: 20px; border: 2px solid var(--gold); }
+        .border-inner::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .border-inner::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .card-content { z-index: 2; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: space-between; }
+        .card-logo { width: 50px; margin-top: 0.5rem; }
+        .card-school { font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 1px; color: var(--text-main); margin-top: 0.5rem; }
+        .card-location { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1px; }
+        .card-divider { width: 40px; height: 1px; background: var(--gold); margin: 0.8rem auto; }
+        .card-divider.small { width: 20px; }
+        .card-title { font-family: var(--font-heading); font-size: 1.6rem; color: var(--gold); line-height: 1.2; }
+        .card-title span { font-size: 1rem; letter-spacing: 2px; display: block; }
+        .card-subtitle { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 1px; margin-top: 0.2rem; }
+        .card-presented { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; margin-top: 0.5rem; }
+        .card-name { font-family: var(--font-heading); font-size: 1.5rem; color: var(--gold-light); margin: 0.2rem 0; }
+        .card-roll { font-size: 0.7rem; color: var(--text-main); margin-bottom: 0.5rem; }
+        .card-event-details { font-size: 0.7rem; color: var(--text-main); line-height: 1.5; margin-bottom: 0.5rem; }
+        .card-quote { font-style: italic; font-size: 0.65rem; color: var(--gold); opacity: 0.8; }
+        .card-footer { font-size: 0.6rem; color: var(--text-muted); margin-top: 0.5rem; }
+        .card-seniors { font-family: var(--font-heading); font-size: 0.7rem; color: var(--gold); margin-bottom: 0.5rem; }
+        
+        .tip { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; text-align: center; }
+        
+        .global-footer { text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.85rem; color: var(--text-muted); width: 100%; max-width: 600px; }
+        .global-footer .credit { color: var(--gold); font-weight: 500; margin-bottom: 0.3rem; }
+        .global-footer a { color: var(--gold); font-weight: 600; text-decoration: none; }
+    </style>
 </head>
 <body>
-    <div class="invite-page">
-        <div class="actions-bar">
-            <a href="ticket.html" class="btn btn-secondary">View Digital Ticket</a>
-            <button id="btn-download-png" class="btn btn-primary">Download PNG</button>
-            <button id="btn-download-pdf" class="btn btn-primary">Download PDF</button>
-        </div>
-
-        <!-- The actual card that gets downloaded (Instagram Square format 1080x1080) -->
-        <div class="invitation-card-wrapper">
-            <div id="invitation-card" class="invitation-card square-format">
-                <div class="border-inner"></div>
-                <div class="card-content">
-                    <img src="assets/logo.png" alt="Ethos Logo" class="card-logo" crossorigin="anonymous">
-                    <h2 class="card-school">ETHOS SENIOR SECONDARY SCHOOL</h2>
-                    <p class="card-location">Barpeta, Assam</p>
-                    
-                    <div class="card-divider"></div>
-                    
-                    <h1 class="card-title">THE FIRST CHAPTER <br><span>— 2026 —</span></h1>
-                    <p class="card-subtitle">A Freshers' Welcome</p>
-                    
-                    <div class="card-divider small"></div>
-                    
-                    <p class="card-presented">This digital invitation is proudly presented to</p>
-                    <h3 class="card-name" id="display-name">Student Name</h3>
-                    <p class="card-roll">Roll No: <span id="display-roll">XI-000</span></p>
-                    
-                    <div class="card-event-details">
-                        <p><strong>Date:</strong> 27 November 2026</p>
-                        <p><strong>Venue:</strong> School Campus</p>
-                    </div>
-                    
-                    <div class="card-quote">
-                        <p>"A new journey. A new chapter.<br>A thousand possibilities."</p>
-                    </div>
-                    
-                    <p class="card-footer">"Every great story begins somewhere."</p>
-                    <p class="card-seniors">With love, your Seniors</p>
-                    <p style="font-size: 0.6rem; color: #888; margin-top: 0.3rem;">Created by <span style="color: #d4af37;">Meezan Ur Rahman</span> · @meezns</p>
-                </div>
-            </div>
-        </div>
-        <p class="tip">Tip: On mobile, you can also long-press the image to save it.</p>
+    <div class="actions-bar">
+        <a href="/first-chapter-2026/ticket.html" class="btn btn-secondary">View Digital Ticket</a>
+        <button id="btn-download-png" class="btn btn-primary">Download PNG</button>
+        <button id="btn-download-pdf" class="btn btn-primary">Download PDF</button>
     </div>
 
-    <!-- html2canvas & jspdf libraries -->
+    <div class="invitation-card-wrapper">
+        <div id="invitation-card" class="invitation-card">
+            <div class="border-inner"></div>
+            <div class="card-content">
+                <img src="/first-chapter-2026/assets/logo.png" alt="Ethos Logo" class="card-logo" crossorigin="anonymous">
+                <h2 class="card-school">ETHOS SENIOR SECONDARY SCHOOL</h2>
+                <p class="card-location">Barpeta, Assam</p>
+                
+                <div class="card-divider"></div>
+                
+                <h1 class="card-title">THE FIRST CHAPTER <br><span>— 2026 —</span></h1>
+                <p class="card-subtitle">A Freshers' Welcome</p>
+                
+                <div class="card-divider small"></div>
+                
+                <p class="card-presented">This digital invitation is proudly presented to</p>
+                <h3 class="card-name" id="display-name">Student Name</h3>
+                <p class="card-roll">Roll No: <span id="display-roll">XI-000</span></p>
+                
+                <div class="card-event-details">
+                    <p><strong>Date:</strong> 27 November 2026</p>
+                    <p><strong>Venue:</strong> School Campus</p>
+                </div>
+                
+                <div class="card-quote">
+                    <p>"A new journey. A new chapter.<br>A thousand possibilities."</p>
+                </div>
+                
+                <p class="card-footer">"Every great story begins somewhere."</p>
+                <p class="card-seniors">With love, your Seniors</p>
+            </div>
+        </div>
+    </div>
+    <p class="tip">Tip: On mobile, you can also long-press the image to save it.</p>
+
+    <footer class="global-footer">
+        <p class="credit">Designed & Developed by Meezan Ur Rahman</p>
+        <p>Connect on Instagram: <a href="https://instagram.com/meeezns" target="_blank">@meeezns</a></p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script type="module" src="js/invitation.js"></script>
-        <!-- Global Footer Script -->
-    <script src="js/footer.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dataStr = localStorage.getItem('tfc_student_data');
+            if (!dataStr) { alert("No registration data found."); window.location.href = '/first-chapter-2026/questionnaire.html'; return; }
+            const data = JSON.parse(dataStr);
+            document.getElementById('display-name').innerText = data.fullName;
+            document.getElementById('display-roll').innerText = data.rollNumber;
+
+            document.getElementById('btn-download-png').addEventListener('click', () => {
+                html2canvas(document.getElementById('invitation-card'), { scale: 2, backgroundColor: "#0a0a0a", useCORS: true }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `TFC2026_Invitation_${data.fullName.replace(/\s+/g, '_')}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                });
+            });
+
+            document.getElementById('btn-download-pdf').addEventListener('click', () => {
+                html2canvas(document.getElementById('invitation-card'), { scale: 2, backgroundColor: "#0a0a0a", useCORS: true }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 190;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+                    pdf.save(`TFC2026_Invitation_${data.fullName.replace(/\s+/g, '_')}.pdf`);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
