@@ -5,9 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionnaire | THE FIRST CHAPTER - 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/questionnaire.css">
+    
+    <style>
+        /* --- ALL CSS BUNDLED HERE --- */
+        :root {
+            --bg-dark: #0a0a0a; --bg-charcoal: #121212; --bg-card: #1a1a1a;
+            --gold: #d4af37; --gold-light: #f3e5ab; --text-main: #f5f5f5;
+            --text-muted: #a0a0a0; --border-gold: rgba(212, 175, 55, 0.3);
+            --error: #e74c3c; --font-heading: 'Cinzel', serif; --font-body: 'Inter', sans-serif;
+            --radius: 8px; --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .hidden { display: none !important; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
+        button { font-family: inherit; cursor: pointer; border: none; }
+
+        /* Form Container */
+        .form-container { max-width: 600px; margin: 2rem auto; padding: 2rem 1.5rem; background: var(--bg-charcoal); border: 1px solid var(--border-gold); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .form-header { text-align: center; margin-bottom: 2rem; }
+        .form-logo { width: 60px; margin-bottom: 0.5rem; }
+        .form-header h1 { font-size: 1.5rem; color: var(--gold); }
+        .form-header span { display: block; font-size: 1rem; color: var(--text-muted); letter-spacing: 4px; }
+
+        /* Progress */
+        .progress-container { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 0.5rem; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0%; background: var(--gold); transition: width 0.4s ease; }
+        .step-indicator { text-align: right; font-size: 0.8rem; color: var(--gold); margin-bottom: 2rem; }
+
+        /* Steps */
+        .form-step { display: none; animation: slideIn 0.5s ease; }
+        .form-step.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .form-step h2 { color: var(--gold-light); font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .step-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        /* Inputs */
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-main); }
+        .input-group input[type="text"], .input-group textarea { width: 100%; padding: 0.8rem; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); color: var(--text-main); font-family: var(--font-body); font-size: 1rem; transition: var(--transition); }
+        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+        .custom-checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; }
+        .custom-checkbox input[type="checkbox"] { appearance: none; width: 18px; height: 18px; border: 1px solid var(--border-gold); border-radius: 4px; background: var(--bg-dark); cursor: pointer; position: relative; }
+        .custom-checkbox input[type="checkbox"]:checked { background: var(--gold); }
+        .custom-checkbox input[type="checkbox"]:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--bg-dark); font-size: 12px; font-weight: bold; }
+        .consent-label { font-size: 0.85rem; line-height: 1.4; align-items: flex-start; }
+        .consent-label input { margin-top: 3px; flex-shrink: 0; }
+
+        /* Errors */
+        .error-msg { display: none; color: var(--error); font-size: 0.8rem; margin-top: 0.3rem; }
+        .input-group.invalid input, .input-group.invalid textarea { border-color: var(--error); }
+        .input-group.invalid .error-msg { display: block; }
+        .global-error { background: rgba(231, 76, 60, 0.1); border: 1px solid var(--error); color: var(--error); padding: 1rem; border-radius: var(--radius); text-align: center; margin-top: 1rem; }
+
+        /* Nav */
+        .form-nav { display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem; }
+        .form-nav button { flex: 1; padding: 0.8rem 1.5rem; border-radius: var(--radius); font-weight: 500; transition: var(--transition); }
+        .btn-primary { background: var(--gold); color: var(--bg-dark); border: 1px solid var(--gold); }
+        .btn-secondary { background: transparent; color: var(--text-main); border: 1px solid rgba(255,255,255,0.2); }
+
+        /* Footer */
+        .global-footer { text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.85rem; color: var(--text-muted); }
+        .global-footer .credit { color: var(--gold); font-weight: 500; margin-bottom: 0.3rem; }
+        .global-footer a { color: var(--gold); font-weight: 600; text-decoration: none; }
+    </style>
 </head>
 <body>
     <div class="form-container">
@@ -16,13 +79,11 @@
             <h1>THE FIRST CHAPTER <span>2026</span></h1>
         </header>
 
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
+        <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
         <p class="step-indicator">Step <span id="current-step">1</span> of <span id="total-steps">6</span></p>
 
         <form id="freshers-form" novalidate>
-            <!-- Step 1: Identity -->
+            <!-- Step 1 -->
             <div class="form-step active" data-step="1">
                 <h2>Welcome to the Beginning</h2>
                 <p class="step-desc">Let's start with the basics.</p>
@@ -33,7 +94,7 @@
                 </div>
             </div>
 
-            <!-- Step 2: Academic -->
+            <!-- Step 2 -->
             <div class="form-step" data-step="2">
                 <h2>Academic Details</h2>
                 <p class="step-desc">Tell us about your academic life.</p>
@@ -51,13 +112,12 @@
                         <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Biology"> Biology</label>
                         <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Computer Science"> Computer Science</label>
                         <label class="custom-checkbox"><input type="checkbox" name="subjects" value="English"> English</label>
-                        <label class="custom-checkbox"><input type="checkbox" name="subjects" value="Other"> Other</label>
                     </div>
                     <span class="error-msg" id="err-subjects">Please select at least one subject.</span>
                 </div>
             </div>
 
-            <!-- Step 3: Personality -->
+            <!-- Step 3 -->
             <div class="form-step" data-step="3">
                 <h2>Personality</h2>
                 <p class="step-desc">A little bit about you.</p>
@@ -72,7 +132,7 @@
                 </div>
             </div>
 
-            <!-- Step 4: Interests -->
+            <!-- Step 4 -->
             <div class="form-step" data-step="4">
                 <h2>Your World</h2>
                 <p class="step-desc">What makes you, you?</p>
@@ -82,7 +142,7 @@
                 </div>
             </div>
 
-            <!-- Step 5: Dreams -->
+            <!-- Step 5 -->
             <div class="form-step" data-step="5">
                 <h2>Dreams & Expectations</h2>
                 <p class="step-desc">Think big. What's your vision?</p>
@@ -102,7 +162,7 @@
                 </div>
             </div>
 
-            <!-- Step 6: Future Self -->
+            <!-- Step 6 -->
             <div class="form-step" data-step="6">
                 <h2>A Message to Your Future Self</h2>
                 <p class="step-desc">A time capsule. Write a note to the person you will become in a year.</p>
@@ -120,20 +180,122 @@
                 </div>
             </div>
 
-            <!-- Navigation Buttons -->
             <div class="form-nav">
-                <button type="button" id="btn-prev" class="btn btn-secondary">Previous</button>
-                <button type="button" id="btn-next" class="btn btn-primary">Next</button>
-                <button type="submit" id="btn-submit" class="btn btn-primary hidden">Submit</button>
+                <button type="button" id="btn-prev" class="btn-secondary">Previous</button>
+                <button type="button" id="btn-next" class="btn-primary">Next</button>
+                <button type="submit" id="btn-submit" class="btn-primary hidden">Submit</button>
             </div>
         </form>
         
         <div id="form-error" class="global-error hidden"></div>
     </div>
 
-    <!-- Firebase SDKs (App, Auth, Firestore) -->
-    <script type="module" src="js/questionnaire.js"></script>
-        <!-- Global Footer Script -->
-    <script src="js/footer.js"></script>
+    <footer class="global-footer">
+        <p class="credit">Designed & Developed by Mizanur Rahman</p>
+        <p>Connect on Instagram: <a href="https://instagram.com/meezns" target="_blank">@meezns</a></p>
+    </footer>
+
+    <script type="module">
+        // --- FIREBASE CONFIG ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        
+        // PASTE YOUR FIREBASE CONFIG HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXp1zVqhetobkxVwCo9mr0KLFrJqHfl3o",
+            authDomain: "the-first-chapter-2026.firebaseapp.com",
+            projectId: "the-first-chapter-2026",
+            storageBucket: "the-first-chapter-2026.firebasestorage.app",
+            messagingSenderId: "752149893488",
+            appId: "1:752149893488:web:56f895f82e54eeea32bfb5"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- FORM LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('freshers-form');
+            const steps = document.querySelectorAll('.form-step');
+            const btnNext = document.getElementById('btn-next');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnSubmit = document.getElementById('btn-submit');
+            const progressBar = document.getElementById('progress-bar');
+            const currentStepText = document.getElementById('current-step');
+            const totalStepsText = document.getElementById('total-steps');
+            
+            let currentStep = 1;
+            const totalSteps = steps.length;
+            totalStepsText.innerText = totalSteps;
+
+            const showStep = (step) => {
+                steps.forEach((el, index) => {
+                    el.classList.remove('active');
+                    if (index === step - 1) el.classList.add('active');
+                });
+                const progress = (step / totalSteps) * 100;
+                progressBar.style.width = `${progress}%`;
+                currentStepText.innerText = step;
+                if (step === 1) btnPrev.style.display = 'none'; else btnPrev.style.display = 'block';
+                if (step === totalSteps) { btnNext.style.display = 'none'; btnSubmit.style.display = 'block'; } 
+                else { btnNext.style.display = 'block'; btnSubmit.style.display = 'none'; }
+                window.scrollTo(0, 0);
+            };
+
+            const validateStep = (step) => {
+                let isValid = true;
+                const currentStepEl = steps[step - 1];
+                const requiredInputs = currentStepEl.querySelectorAll('input[required], textarea[required]');
+                requiredInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false; input.closest('.input-group').classList.add('invalid');
+                    } else { input.closest('.input-group').classList.remove('invalid'); }
+                });
+                const rollInput = currentStepEl.querySelector('#rollNumber');
+                if (rollInput && rollInput.value && !/^XI-\d{3}$/.test(rollInput.value)) {
+                    isValid = false; rollInput.closest('.input-group').classList.add('invalid');
+                }
+                const subjects = currentStepEl.querySelectorAll('input[name="subjects"]:checked');
+                if (step === 2 && subjects.length === 0) { isValid = false; document.getElementById('err-subjects').style.display = 'block'; } 
+                else if (step === 2) { document.getElementById('err-subjects').style.display = 'none'; }
+                const consent = currentStepEl.querySelector('#consent');
+                if (step === totalSteps && consent && !consent.checked) { isValid = false; document.getElementById('err-consent').style.display = 'block'; }
+                return isValid;
+            };
+
+            btnNext.addEventListener('click', () => { if (validateStep(currentStep)) { currentStep++; showStep(currentStep); } });
+            btnPrev.addEventListener('click', () => { if (currentStep > 1) { currentStep--; showStep(currentStep); } });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!validateStep(currentStep)) return;
+                btnSubmit.innerText = "Submitting..."; btnSubmit.disabled = true;
+                const formData = new FormData(form);
+                const data = {};
+                data.subjects = Array.from(form.querySelectorAll('input[name="subjects"]:checked')).map(cb => cb.value);
+                formData.forEach((value, key) => { if (key !== 'subjects') data[key] = value; });
+
+                try {
+                    const q = query(collection(db, "registrations"), where("rollNumber", "==", data.rollNumber));
+                    const querySnapshot = await getDocs(q);
+                    if (!querySnapshot.empty) throw new Error("This Roll Number has already been registered.");
+
+                    const ticketId = "TFC-2026-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+                    data.ticketId = ticketId;
+                    data.checkedIn = false;
+                    data.timestamp = serverTimestamp();
+
+                    await addDoc(collection(db, "registrations"), data);
+                    localStorage.setItem('tfc_student_data', JSON.stringify(data));
+                    window.location.href = '/first-chapter-2026/invitation.html';
+                } catch (error) {
+                    document.getElementById('form-error').innerText = error.message;
+                    document.getElementById('form-error').classList.remove('hidden');
+                    btnSubmit.innerText = "Submit"; btnSubmit.disabled = false;
+                }
+            });
+            showStep(currentStep);
+        });
+    </script>
 </body>
 </html>
