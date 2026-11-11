@@ -5,51 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Ticket | THE FIRST CHAPTER - 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/invitation.css"> <!-- Reuses some card styles -->
+    <style>
+        :root { --bg-dark: #0a0a0a; --bg-charcoal: #121212; --gold: #d4af37; --text-main: #f5f5f5; --text-muted: #a0a0a0; --border-gold: rgba(212, 175, 55, 0.3); --font-heading: 'Cinzel', serif; --font-body: 'Inter', sans-serif; --radius: 8px; --transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-dark) 100%); color: var(--text-main); font-family: var(--font-body); min-height: 100vh; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; }
+        
+        .actions-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-bottom: 2rem; width: 100%; max-width: 600px; }
+        .btn { display: inline-block; padding: 0.8rem 1.5rem; border-radius: var(--radius); font-weight: 500; text-align: center; transition: var(--transition); cursor: pointer; border: none; font-family: inherit; font-size: 0.85rem; }
+        .btn-primary { background: var(--gold); color: var(--bg-dark); border: 1px solid var(--gold); }
+        .btn-secondary { background: transparent; color: var(--text-main); border: 1px solid rgba(255,255,255,0.2); text-decoration: none; }
+
+        .ticket-wrapper { width: 100%; max-width: 400px; }
+        .ticket-card { background: var(--bg-charcoal); border: 1px solid var(--border-gold); border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ticket-header { background: var(--gold); color: var(--bg-dark); padding: 1.5rem 1rem; text-align: center; }
+        .ticket-header h2 { font-family: var(--font-heading); font-size: 1.2rem; letter-spacing: 1px; }
+        .ticket-header p { font-size: 0.7rem; font-weight: 600; }
+        
+        .ticket-body { display: flex; flex-direction: column; padding: 1.5rem; }
+        .ticket-info p { margin-bottom: 0.8rem; font-size: 0.9rem; }
+        .ticket-info span { display: block; font-size: 0.6rem; color: var(--gold); letter-spacing: 1px; }
+        .ticket-info strong { font-weight: 400; color: var(--text-main); }
+        .mono { font-family: monospace; font-size: 0.8rem; word-break: break-all; }
+        
+        .ticket-qr { text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed rgba(255,255,255,0.2); }
+        #qrcode { display: inline-block; background: white; padding: 10px; border-radius: 4px; }
+        .qr-label { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 2px; margin-top: 0.5rem; }
+        
+        .ticket-footer { background: rgba(255,255,255,0.05); padding: 0.8rem; text-align: center; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1px; }
+        
+        @media (min-width: 400px) {
+            .ticket-body { flex-direction: row; justify-content: space-between; align-items: center; }
+            .ticket-qr { margin-top: 0; padding-top: 0; border-top: none; border-left: 1px dashed rgba(255,255,255,0.2); padding-left: 1.5rem; }
+        }
+
+        .global-footer { text-align: center; padding: 2rem 1rem; margin-top: 3rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.85rem; color: var(--text-muted); width: 100%; max-width: 600px; }
+        .global-footer .credit { color: var(--gold); font-weight: 500; margin-bottom: 0.3rem; }
+        .global-footer a { color: var(--gold); font-weight: 600; text-decoration: none; }
+    </style>
 </head>
 <body>
-    <div class="invite-page">
-        <div class="actions-bar">
-            <a href="invitation.html" class="btn btn-secondary">Back to Invitation</a>
-            <button id="btn-download-ticket" class="btn btn-primary">Save Ticket</button>
-        </div>
+    <div class="actions-bar">
+        <a href="/first-chapter-2026/invitation.html" class="btn btn-secondary">Back to Invitation</a>
+        <button id="btn-download-ticket" class="btn btn-primary">Save Ticket</button>
+    </div>
 
-        <div class="ticket-wrapper">
-            <div id="ticket-card" class="ticket-card">
-                <div class="ticket-header">
-                    <h2>THE FIRST CHAPTER 2026</h2>
-                    <p>ETHOS SENIOR SECONDARY SCHOOL</p>
+    <div class="ticket-wrapper">
+        <div id="ticket-card" class="ticket-card">
+            <div class="ticket-header">
+                <h2>THE FIRST CHAPTER 2026</h2>
+                <p>ETHOS SENIOR SECONDARY SCHOOL</p>
+            </div>
+            
+            <div class="ticket-body">
+                <div class="ticket-info">
+                    <p><span>NAME</span> <strong id="ticket-name">Student Name</strong></p>
+                    <p><span>CLASS</span> <strong>Class XI (Science)</strong></p>
+                    <p><span>DATE</span> <strong>27 Nov 2026</strong></p>
+                    <p><span>TICKET ID</span> <strong id="ticket-id" class="mono">TFC-2026-XXXXX</strong></p>
                 </div>
-                
-                <div class="ticket-body">
-                    <div class="ticket-info">
-                        <p><span>NAME</span> <strong id="ticket-name">Student Name</strong></p>
-                        <p><span>CLASS</span> <strong>Class XI (Science)</strong></p>
-                        <p><span>DATE</span> <strong>27 Nov 2026</strong></p>
-                        <p><span>TICKET ID</span> <strong id="ticket-id" class="mono">TFC-2026-XXXXX</strong></p>
-                    </div>
-                    <div class="ticket-qr">
-                        <!-- QR Code generated via API/Canvas -->
-                        <div id="qrcode"></div>
-                        <p class="qr-label">SCAN AT ENTRY</p>
-                    </div>
+                <div class="ticket-qr">
+                    <div id="qrcode"></div>
+                    <p class="qr-label">SCAN AT ENTRY</p>
                 </div>
-                
-                <div class="ticket-footer">
-                    <p>Admit One. Non-transferable.</p>
-                </div>
+            </div>
+            
+            <div class="ticket-footer">
+                <p>Admit One. Non-transferable.</p>
             </div>
         </div>
     </div>
 
-    <!-- QRCode.js library -->
+    <footer class="global-footer">
+        <p class="credit">Designed & Developed by Meezan Ur Rahman</p>
+        <p>Connect on Instagram: <a href="https://instagram.com/meeezns" target="_blank">@meeezns</a></p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <!-- html2canvas for saving ticket -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script type="module" src="js/ticket.js"></script>
-        <!-- Global Footer Script -->
-    <script src="js/footer.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dataStr = localStorage.getItem('tfc_student_data');
+            if (!dataStr) { window.location.href = '/first-chapter-2026/questionnaire.html'; return; }
+            const data = JSON.parse(dataStr);
+            
+            document.getElementById('ticket-name').innerText = data.fullName;
+            document.getElementById('ticket-id').innerText = data.ticketId;
+
+            new QRCode(document.getElementById("qrcode"), {
+                text: data.ticketId,
+                width: 128, height: 128,
+                colorDark : "#000000", colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('btn-download-ticket').addEventListener('click', () => {
+                html2canvas(document.getElementById('ticket-card'), { scale: 2, backgroundColor: "#121212", useCORS: true }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `TFC2026_Ticket_${data.fullName.replace(/\s+/g, '_')}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                });
+            });
+        });
+    </script>
 </body>
 </html>
